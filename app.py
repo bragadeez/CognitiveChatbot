@@ -52,7 +52,7 @@ current_index = 0
 # -------------------------------
 # Initialize Groq Client
 # -------------------------------
-GROQ_API_KEY = "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"
+GROQ_API_KEY = "HEHEHE u aint getting none"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 try:
