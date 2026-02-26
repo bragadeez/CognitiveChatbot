@@ -56,15 +56,12 @@ current_index = 0
 # -------------------------------
 # Initialize Groq Client
 # -------------------------------
-<<<<<<< HEAD
 # get key from environment (set via .env or system env vars)
 GROQ_API_KEY = os.getenv("API_KEY")
 if not GROQ_API_KEY:
     raise EnvironmentError("GROQ API key not found. Please set API_KEY in .env or environment.")
 
-=======
-GROQ_API_KEY = "HEHEHE u aint getting none"
->>>>>>> 82acabbe852904c808a5deb6e9daab16dfeaa8af
+
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 try:
