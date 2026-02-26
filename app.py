@@ -21,6 +21,10 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 import os
+from dotenv import load_dotenv
+
+# load environment variables from .env file
+load_dotenv()
 
 # -------------------------------
 # Flask App Setup
@@ -52,7 +56,11 @@ current_index = 0
 # -------------------------------
 # Initialize Groq Client
 # -------------------------------
-GROQ_API_KEY = "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"
+# get key from environment (set via .env or system env vars)
+GROQ_API_KEY = os.getenv("API_KEY")
+if not GROQ_API_KEY:
+    raise EnvironmentError("GROQ API key not found. Please set API_KEY in .env or environment.")
+
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 try:
@@ -192,6 +200,8 @@ def submit_answer():
             features = np.array(submit_answer.responses).reshape(1, -1)
             features_scaled = svm_scaler.transform(features)
             prediction = svm_model.predict(features_scaled)[0]
+            probabilities = svm_model.predict_proba(features_scaled)[0]
+            confidence = probabilities[prediction] * 100  # Convert to percentage
             
             style_map = {0: "Auditory", 1: "Reading/Writing", 2: "Visual"}
             predicted_style = style_map.get(prediction)
@@ -202,9 +212,10 @@ def submit_answer():
             
             print(f"Prediction value: {prediction}")
             print(f"Mapped style: {predicted_style}")
+            print(f"Confidence: {confidence:.2f}%")
             
             submit_answer.responses = []  # Reset for next user
-            return jsonify({"done": True, "style": predicted_style})
+            return jsonify({"done": True, "style": predicted_style, "confidence": round(confidence, 2)})
             
         except Exception as e:
             print(f"Error in prediction: {e}")
@@ -216,8 +227,9 @@ def submit_answer():
 @app.route("/after_result")
 def after_result():
     style = request.args.get('style')
-    print(f"Rendering after_result with style: {style}")  # Debug log
-    return render_template("after_result.html", style=style)
+    confidence = request.args.get('confidence')
+    print(f"Rendering after_result with style: {style}, confidence: {confidence}")  # Debug log
+    return render_template("after_result.html", style=style, confidence=confidence)
 
 @app.route("/chatbot")
 def chatbot_page():

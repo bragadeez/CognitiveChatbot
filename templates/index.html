@@ -47,7 +47,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.done) {
-              window.location.href = `/after_result?style=${data.style}`;
+              window.location.href = `/after_result?style=${data.style}&confidence=${data.confidence}`;
             } else {
               questionDiv.textContent = data.question;
               updateProgress(data.index, data.total);
@@ -64,7 +64,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.done) {
-              window.location.href = `/after_result?style=${data.style}`;
+              window.location.href = `/after_result?style=${data.style}&confidence=${data.confidence}`;
             } else {
               currentQuestion++;
               loadQuestion();
