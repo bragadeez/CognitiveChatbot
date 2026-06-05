@@ -1,3 +1,55 @@
-data/data.pdf
-# local environment variables
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Environment variables ─────────────────────────────────────────────────────
 .env
+.env.*
+!.env.example
+
+# ── ML model binaries (large files – store in git-lfs or share separately) ────
+models/*.pkl
+vectorstore/index.faiss
+vectorstore/index.pkl
+
+# ── Large data files ──────────────────────────────────────────────────────────
+data/data.pdf
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.DS_Store
+
+# ── IDEs & editors ────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── TTS audio output (generated at runtime) ──────────────────────────────────
+static/speech*.wav
+
+# ── Pytest / test cache ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/

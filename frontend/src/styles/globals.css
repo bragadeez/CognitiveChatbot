@@ -1,0 +1,183 @@
+/* globals.css — Wabi-Sabi design tokens, resets, and tactile typography */
+
+/* ── CSS Variables ────────────────────────────────────────────────────────── */
+:root {
+  /* Brand palette — Retaining Academic Blue & Educational Teal */
+  --color-primary:       hsl(220, 90%, 56%);   /* premium academic blue */
+  --color-primary-dark:  hsl(220, 90%, 42%);
+  --color-primary-light: hsl(220, 90%, 70%);
+  --color-accent:        hsl(175, 60%, 42%);   /* crisp educational teal */
+  --color-accent-dark:   hsl(175, 60%, 30%);
+
+  /* Surfaces */
+  --surface-bg:          hsl(210, 20%, 98%);   /* clean paper off-white */
+  --surface-1:           hsl(0, 0%, 100%);     /* pure white cards */
+  --surface-2:           hsl(210, 30%, 97%);   /* slightly tinted off-white */
+  --surface-3:           hsl(210, 20%, 92%);   /* soft border grey */
+  --surface-border:      hsl(210, 16%, 88%);   /* raw timber timber border */
+
+  /* Text */
+  --text-primary:   hsl(220, 20%, 15%);        /* deep loam/charcoal */
+  --text-secondary: hsl(220, 12%, 40%);        /* bark slate gray */
+  --text-muted:     hsl(220, 8%, 60%);         /* dried grass gray */
+
+  /* Status */
+  --color-success: hsl(145, 63%, 42%);
+  --color-error:   hsl(355, 75%, 55%);
+  --color-warning: hsl(38, 90%, 50%);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+
+  /* Spacing */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Shadows — Soft blue-tinted shadows instead of black */
+  --shadow-sm: 0 2px 8px rgba(37, 99, 235, 0.03);
+  --shadow-md: 0 8px 24px -4px rgba(37, 99, 235, 0.06), 0 2px 8px -2px rgba(37, 99, 235, 0.03);
+  --shadow-lg: 0 20px 40px -10px rgba(37, 99, 235, 0.09), 0 8px 16px -8px rgba(37, 99, 235, 0.04);
+  
+  /* Transitions */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Nunito', -apple-system, system-ui, sans-serif;
+  background: var(--surface-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global Paper Texture Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.035; /* 3.5% opacity for paper texture */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { font-family: inherit; cursor: pointer; }
+
+img { max-width: 100%; }
+
+/* ── Ambient Background Blobs ───────────────────────────────────────────── */
+.blob-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: -1;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--color-primary);
+  top: -10%;
+  left: -10%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.blob-2 {
+  width: 450px;
+  height: 450px;
+  background: var(--color-accent);
+  bottom: -10%;
+  right: -10%;
+  border-radius: 40% 60% 70% 30% / 50% 60% 30% 70%;
+  animation-delay: 2s;
+}
+
+/* ── Utility classes ──────────────────────────────────────────────────────── */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+}
+
+.glow {
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary-light); }
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.08; }
+  50%       { transform: scale(1.08); opacity: 0.12; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes typingDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in    { animation: fadeIn 0.25s ease both; }
+
+
