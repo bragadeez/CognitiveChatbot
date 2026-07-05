@@ -1,23 +1,37 @@
-# Cognitive Chatbot: Personalized ML Education via VARK Adaptivity and RAG
+# Cognitive Chatbot: Personalized Learning using VARK, RAG, and LLMs
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Publication](https://img.shields.io/badge/Springer-2025%20Accepted-orange.svg)](#)
 
-Cognitive Chatbot is an intelligent, adaptive educational application designed to personalize Machine Learning tutoring based on a student's cognitive learning style. By leveraging the **VARK learning model** (Visual, Auditory, Reading/Writing, Kinesthetic), the system dynamically tailors its instructional formats (including mindmaps, curated videos, detailed text, and real-world analogies) to match the student's learning profile.
+Cognitive Chatbot is an intelligent adaptive educational platform that personalizes learning according to each student's cognitive learning style. Using the VARK learning model (Visual, Auditory, Reading/Writing, and Kinesthetic), the system dynamically adapts explanations, diagrams, videos, quizzes, and examples to match how each learner understands concepts most effectively.
 
-The system utilizes a Support Vector Machine (SVM) classifier to diagnose learning styles from a 15-question diagnostic questionnaire. Conversational questions are then routed through a **Retrieval-Augmented Generation (RAG)** pipeline powered by a local FAISS vector store and Groq-hosted LLaMA 3.3 (70B).
+Instead of being limited to a single subject, the chatbot can support any domain by simply replacing or expanding its knowledge base. Through Retrieval-Augmented Generation (RAG), it retrieves relevant information from uploaded educational materials before generating responses, enabling accurate, context-aware tutoring across multiple subjects.
+
+The system utilizes a Support Vector Machine (SVM) classifier to diagnose learning styles from a 15-question diagnostic questionnaire. User queries are processed through a Retrieval-Augmented Generation (RAG) pipeline powered by a FAISS vector database and Groq-hosted Llama 3.3 (70B). Relevant educational content is retrieved before response generation, allowing the chatbot to deliver grounded, personalized, and subject-independent explanations.
 
 ---
 
 ## Why the Project is Useful
 
-Traditional chatbot tutors output uniform textual answers regardless of a student's optimal cognitive modality. Cognitive Chatbot bridges this gap by offering:
+Most educational chatbots provide the same explanation to every learner regardless of how they learn best. Cognitive Chatbot addresses this challenge by combining cognitive learning style adaptation with Retrieval-Augmented Generation to provide personalized, context-aware learning experiences.
+
+The platform offers:
 *   **VARK Personalization**: Classifies students into distinct learning modalities and shapes responses dynamically.
 *   **Context Preservation**: Maintains multi-turn conversation memory (last 10 turns) across style changes.
 *   **RAG over Authoritative Sources**: Grounds answers in course materials using vector embeddings, preventing AI hallucinations.
 *   **Tactile User Interface**: Styled using a Wabi-Sabi paper design layout with custom SVG icons and a floating toast active-style notification.
+
+---
+
+# System Architecture
+
+The Cognitive Chatbot follows a modular architecture that combines cognitive learning style detection, Retrieval-Augmented Generation (RAG), conversational memory, and Large Language Models to deliver personalized educational assistance.
+
+<p align="center">
+  <img src="data/Architecture_Final_2.png" alt="Cognitive Chatbot Architecture" width="1000"/>
+</p>
 
 ---
 
